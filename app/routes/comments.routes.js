@@ -1,24 +1,21 @@
 const express = require("express");
 const router = express.Router();
-const bodyParser = require("body-parser");
-const userController = require("../controllers/user.controller");
-
+const commentController = require("../controllers/comments.controller");
 module.exports = (app) => {
-  // Create a new user (signup)
-  router.post("/", bodyParser.json(), userController.createUser);
+// Create a comment for a specific task
+router.post("/task/:taskId", commentController.createComment);
 
-  // Get all users
-  router.get("/", userController.getAllUsers);
+// Get all comments for a specific task
+router.get("/task/:taskId", commentController.getAllComments);
 
-  // Get a user by ID
-  router.get("/:id", userController.getUserById);
+// Get a specific comment by its ID
+router.get("/:id", commentController.getCommentById);
 
-  // Update a user
-  router.put("/:id", bodyParser.json(), userController.updateUser);
+// Update a specific comment
+router.put("/:id", commentController.updateComment);
 
-  // Delete a user
-  router.delete("/:id", userController.deleteUser);
-
-  // Mount router at /api/users
-  app.use("/api/users", router);
+// Delete a specific comment
+router.delete("/:id", commentController.deleteComment);
+ app.use("/api/user", router);
 };
+
