@@ -15,7 +15,7 @@ exports.createComment = async (req, res) => {
     const comment = await db.comments.create({
       content: content.trim(),
       task_id,
-      user_id:1,
+      user_id:2,
       // userId: req.user.id  // if you have user auth middleware
     });
 
