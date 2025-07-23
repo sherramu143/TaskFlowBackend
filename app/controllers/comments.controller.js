@@ -5,7 +5,7 @@ const { Comment } = db.comments;
 exports.createComment = async (req, res) => {
   try {
     const { content } = req.body;
-    const { taskId } = req.params;  // assuming you get taskId from URL params
+    const { task_id } = req.params;  // assuming you get taskId from URL params
 
     if (!content || !content.trim()) {
       return res.status(400).json({ message: "Comment content cannot be empty" });
@@ -14,7 +14,7 @@ exports.createComment = async (req, res) => {
     // You might want to also attach userId from auth middleware here
     const comment = await db.comments.create({
       content: content.trim(),
-      task_id:taskId,
+      task_id,
       user_id:1,
       // userId: req.user.id  // if you have user auth middleware
     });
