@@ -1,21 +1,13 @@
-const express = require("express");
-const router = express.Router();
-const commentController = require("../controllers/comments.controller");
 module.exports = (app) => {
-// Create a comment for a specific task
-router.post("/task/:taskId", commentController.createComment);
+  const express = require("express");
+  const router = express.Router();
+  const commentController = require("../controllers/comments.controller");
 
-// Get all comments for a specific task
-router.get("/task/:taskId", commentController.getAllComments);
+  router.post("/task/:task_id", commentController.createComment);
+  router.get("/task/:task_id", commentController.getAllComments);
+  router.get("/:id", commentController.getCommentById);
+  router.put("/:id", commentController.updateComment);
+  router.delete("/:id", commentController.deleteComment);
 
-// Get a specific comment by its ID
-router.get("/:id", commentController.getCommentById);
-
-// Update a specific comment
-router.put("/:id", commentController.updateComment);
-
-// Delete a specific comment
-router.delete("/:id", commentController.deleteComment);
- app.use("/api/user", router);
+  app.use("/api/comments", router);
 };
-
