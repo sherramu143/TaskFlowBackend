@@ -37,7 +37,8 @@ exports.getProjectById = async (req, res) => {
 exports.updateProject = async (req, res) => {
   try {
     const { name, description } = req.body;
-    const project = await Project.findByPk(req.params.id);
+const id=req.params.id;
+    const project = await Project.findOne({where:{id}});
     if (!project) return res.status(404).json({ message: 'Project not found' });
 
     project.name = name || project.name;
@@ -52,7 +53,8 @@ exports.updateProject = async (req, res) => {
 
 exports.deleteProject = async (req, res) => {
   try {
-    const project = await Project.findByPk(req.params.id);
+    const id=req.params.id;
+    const project = await Project.findOne({where:{id}});
     if (!project) return res.status(404).json({ message: 'Project not found' });
 
     await project.destroy();
